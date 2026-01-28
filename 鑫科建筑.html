@@ -1,0 +1,2519 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>鑫科建筑·筑家·更筑未来</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-bg: #f8f9fa;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", "Microsoft Yahei", sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* 头部样式 */
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a2530 100%);
+            color: white;
+            padding: 1.8rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* 主容器 */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* 顶部风格导航 */
+        .style-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.8rem;
+            padding: 1.8rem 0.5rem;
+            background-color: white;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .style-btn {
+            padding: 0.7rem 1.5rem;
+            background-color: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark-text);
+            transition: var(--transition);
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .style-btn:hover {
+            border-color: var(--secondary-color);
+            color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .style-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+            box-shadow: var(--card-shadow);
+        }
+
+        .style-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* 子类别导航 */
+        .subcategory-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1.5rem 0.5rem;
+            background-color: var(--light-bg);
+            border-bottom: 1px solid #ddd;
+        }
+
+        .subcategory-btn {
+            padding: 0.6rem 1.2rem;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--dark-text);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .subcategory-btn:hover {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+
+        .subcategory-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+            box-shadow: 0 3px 6px rgba(52, 152, 219, 0.2);
+        }
+
+        .subcategory-btn i {
+            font-size: 1.1rem;
+        }
+
+        /* 图片展示区域 */
+        .gallery {
+            padding: 2rem 0.5rem;
+        }
+
+        .gallery-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding: 0 0.5rem;
+        }
+
+        .gallery-title {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+
+        .image-counter {
+            color: var(--light-text);
+            font-size: 1rem;
+            background-color: #f0f0f0;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        /* 图片网格 */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .image-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .image-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--hover-shadow);
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 280px;
+            background-color: #f5f5f5;
+        }
+
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e0e0e0;
+            border-top: 3px solid var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1;
+        }
+
+        .image-container.loading::before {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 280px;
+            object-fit: contain;
+            transition: var(--transition);
+            display: block;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        .image-card:hover .image-container img {
+            transform: scale(1.05);
+        }
+
+        .image-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(44, 62, 80, 0.85);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .image-info {
+            padding: 1.2rem;
+        }
+
+        .image-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .image-desc {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.5;
+        }
+
+        /* 加载状态 */
+        .loader {
+            text-align: center;
+            padding: 3rem;
+            color: var(--light-text);
+            font-size: 1.1rem;
+            display: none; /* 默认隐藏 */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-color);
+        }
+
+        /* 空状态 */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--light-text);
+            display: none; /* 默认隐藏 */
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 2% auto;
+            max-width: 900px;
+            max-height: 95vh;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a2530 100%);
+            color: white;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .close-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+            max-height: calc(95vh - 120px);
+        }
+
+        .modal-image {
+                max-width: 90%;
+                max-height: 85vh;
+                object-fit: contain;
+                border-radius: 8px;
+                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+                transition: opacity 0.3s ease;
+                display: block;
+                margin: 0 auto;
+            }
+
+        /* 轮播容器样式 */
+        .modal-image-container {
+            position: relative;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* 轮播控制按钮 */
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background-color: rgba(44, 62, 80, 0.8);
+            color: white;
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .carousel-btn:hover {
+            background-color: rgba(44, 62, 80, 1);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev-btn {
+            left: 10px;
+        }
+
+        .next-btn {
+            right: 10px;
+        }
+
+        /* 图片指示器 */
+        .image-indicators {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .indicator.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+
+        .indicator:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--light-bg);
+            border-radius: 10px;
+        }
+
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            color: var(--light-text);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .modal-features {
+            margin-top: 1.5rem;
+        }
+
+        .features-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .feature-tag {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--secondary-color);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .modal-desc {
+            color: var(--light-text);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        /* 使用说明 */
+        .style-info {
+            background-color: white;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .style-info h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .style-info p {
+            color: var(--light-text);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* 底部 */
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+
+        .footer p {
+            margin: 0.3rem 0;
+            opacity: 0.85;
+            font-size: 0.9rem;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .style-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                margin: 5% auto;
+                width: 95%;
+            }
+
+            .modal-header {
+                padding: 1rem 1.5rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+            }
+
+            .gallery-title {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>鑫科建筑·筑家·更筑未来</h1>
+        <p>专业建筑设计案例展示平台，为您提供多样化的建筑外观设计方案</p>
+    </div>
+
+    <div class="container">
+        <!-- 顶部风格导航 -->
+        <div class="style-nav">
+            <button class="style-btn active" data-style="new-chinese">
+                <i class="fas fa-home"></i> 新中式
+            </button>
+            <button class="style-btn" data-style="simple-european">
+                <i class="fas fa-church"></i> 简欧
+            </button>
+            <button class="style-btn" data-style="modern">
+                <i class="fas fa-city"></i> 现代风
+            </button>
+            <button class="style-btn" data-style="suzhou">
+                <i class="fas fa-water"></i> 苏氏
+            </button>
+            <button class="style-btn" data-style="garden">
+                <i class="fas fa-leaf"></i> 田园
+            </button>
+            <button class="style-btn" data-style="courtyard">
+                <i class="fas fa-tree"></i> 中式三合院/四合院
+            </button>
+            <button class="style-btn" data-style="duplex">
+                <i class="fas fa-home"></i> 兄弟双拼
+            </button>
+        </div>
+
+        <!-- 子类别导航 -->
+        <div class="subcategory-nav">
+            <button class="subcategory-btn active" data-subcategory="1">
+                <i class="fas fa-home"></i> 一层
+            </button>
+            <button class="subcategory-btn" data-subcategory="2">
+                <i class="fas fa-home"></i> 二层
+            </button>
+            <button class="subcategory-btn" data-subcategory="3">
+                <i class="fas fa-home"></i> 三层
+            </button>
+            <button class="subcategory-btn" data-subcategory="4">
+                <i class="fas fa-home"></i> 四层
+            </button>
+        </div>
+
+        <!-- 风格说明 -->
+        <div class="style-info">
+            <h3><i class="fas fa-info-circle"></i> 使用说明</h3>
+            <p>选择上方建筑风格，然后选择对应的类型查看外观设计。每种风格都有4个楼层类型：一层、二层、三层、四层。兄弟双拼不分楼层，直接展示；中式三合院/四合院只有一层设计。</p>
+        </div>
+
+        <!-- 图片展示区域 -->
+        <div class="gallery">
+            <div class="gallery-header">
+                <h2 class="gallery-title">新中式 - 三层外观设计</h2>
+                <div class="image-counter">共 <span id="image-count">18</span> 张外观图</div>
+            </div>
+
+            <div class="image-grid" id="image-grid"></div>
+
+            <div class="loader" id="loader" style="display: none;">
+                <i class="fas fa-spinner fa-spin"></i> 加载中...
+            </div>
+
+            <div class="empty-state" id="empty-state" style="display: none;">
+                <i class="fas fa-images"></i>
+                <h3>暂无外观图片</h3>
+                <p>当前筛选条件下没有找到相关外观设计</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 图片详情弹窗 -->
+    <div class="modal" id="image-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-title">建筑外观标题</h3>
+                <button class="close-btn" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-image-container" id="modal-image-container">
+                    <img class="modal-image" id="modal-image" src="" alt="建筑外观">
+
+                    <!-- 轮播控制按钮 -->
+                    <button class="carousel-btn prev-btn" id="prev-btn">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next-btn" id="next-btn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+
+                    <!-- 图片指示器 -->
+                    <div class="image-indicators" id="image-indicators"></div>
+                </div>
+                <div class="modal-details">
+                    <div class="detail-item">
+                        <span class="detail-label">建筑风格</span>
+                        <span class="detail-value" id="modal-style">新中式</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">楼层/类型</span>
+                        <span class="detail-value" id="modal-subcategory">一层</span>
+                    </div>
+                </div>
+                <p class="modal-desc" id="modal-desc">建筑描述</p>
+                <div class="modal-features">
+                    <h4 class="features-title">设计特点</h4>
+                    <div class="features-list" id="modal-features">
+                        <!-- 特点标签将通过JavaScript动态添加 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>© 2023 建筑外观风格展示 | 专业建筑设计案例库</p>
+        <p>电话: 138-0000-0000 | 邮箱: contact@architecture-showcase.com</p>
+    </div>
+
+    <script>
+        // 建筑外观数据 - 统一使用images数组格式
+        const buildingData = [
+            // 新中式风格 - 一层 (不含兄弟双拼)
+            {
+                id: 1,
+                style: "new-chinese",
+                subcategory: "1",
+                title: "新中式一层别墅",
+                desc: "传统与现代结合的单层建筑，白墙黛瓦，庭院深深",
+                features: ["白墙黛瓦", "庭院设计", "中式窗棂", "坡屋顶"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769577290225-4b70368f-3482-4527-954e-98addb0dca70.jpg"
+                ]
+            },
+            {
+                id: 2,
+                style: "new-chinese",
+                subcategory: "1",
+                title: "新中式园林平层",
+                desc: "融合园林设计的单层住宅，小桥流水，曲径通幽",
+                features: ["园林景观", "水景设计", "连廊", "月亮门"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769577337861-5e331e16-751d-4248-9ea9-5abba5e093e0.jpg"
+                ]
+            },
+
+
+            // 新中式风格 - 二层
+            {
+                id: 6,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427713112-69e9bb55-c445-4c13-8551-8f085ce56b99.jpg"
+                ]
+            },
+            {
+                id: 7,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式现代两层楼",
+                desc: "现代材料与传统形式结合的两层住宅",
+                features: ["现代材料", "玻璃幕墙", "传统屋顶", "阳台设计"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427740249-4488af92-a284-4137-98b0-742f2e91f12d.jpg"
+                ]
+            },
+            {
+                id: 83,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427772111-b1b3decb-a200-4e60-ab92-9823fa227a13.jpg"
+                ]
+            },
+            {
+                id: 84,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427792697-a5ab2ae5-21a4-45f3-bb35-4a47bb9c578d.jpg"
+                ]
+            },
+            {
+                id: 85,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427817292-59aad8a0-ca83-4ccc-bdc2-76fcc5697c19.jpg"
+                ]
+            },
+            {
+                id: 86,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427842705-8349f6e0-b27a-4ac0-85ca-216ffffac5e2.jpg"
+                ]
+            },
+            {
+                id: 87,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427862921-c8eb2e02-18e0-492e-b147-80d302dc0d59.jpg"
+                ]
+            },
+            {
+                id: 88,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427888143-26d354b8-6b40-465b-90be-23aa84662f74.jpg"
+                ]
+            },
+            {
+                id: 89,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427907695-13e52d05-4043-41a6-b9d7-f4f16385f691.jpg"
+                ]
+            },
+            {
+                id: 90,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427942557-1761f9eb-fc84-4007-b5f0-fdeb54413fa8.jpg"
+                ]
+            },
+            {
+                id: 91,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427969084-4ed3843b-3d96-4b2f-917e-c402f31f6d62.jpg"
+                ]
+            },
+            {
+                id: 92,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427992393-2d8cd097-99cd-4e8b-a9c7-12340bff2f2a.jpg"
+                ]
+            },
+            {
+                id: 93,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428010783-ce084333-2b39-4e3a-8ed5-b23db83ac4c7.jpg"
+                ]
+            },
+            {
+                id: 94,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428033653-e29b79b2-22cb-4dff-ac29-4df168f1505d.jpg"
+                ]
+            },
+            {
+                id: 95,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428053537-4e7cec91-f9c4-4cea-bab5-6234f940fd4f.jpg"
+                ]
+            },
+            {
+                id: 96,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428323552-c67c0103-c8c9-44e2-9ec5-8522c856fb58.jpg"
+                ]
+            },
+            {
+                id: 97,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428352203-2c40980f-5c39-4f34-b8b6-0e043e3a3bcf.jpg"
+                ]
+            },
+             {
+                id: 133,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428387414-7bf2da37-b1b9-44af-a4bd-868cd7fcf0ae.jpg"
+                ]
+            },
+            {
+                id: 134,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428463358-02521f55-d2a9-4a85-9aed-a9ed91360336.jpg"
+                ]
+            },
+            {
+                id: 135,
+                style: "new-chinese",
+                subcategory: "2",
+                title: "新中式两层别墅",
+                desc: "经典的两层中式别墅，飞檐翘角，气势恢宏",
+                features: ["飞檐翘角", "两层结构", "露台设计", "中式栏杆"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428484194-91232c3e-1819-4ed6-84af-2b987ded4fa2.jpg"
+                ]
+            },
+
+            // 新中式风格 - 三层
+            {
+                id: 6,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428737380-277972e6-638a-466a-abaf-08e8934a6f75.jpg"
+                ]
+            },
+            {
+                id: 116,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428763018-07622768-de76-4232-a457-aac0d290f2a8.jpg"
+                ]
+            },
+            {
+                id: 117,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428794725-09e7d346-58fe-43ea-8618-77de759d0c44.jpg"
+                ]
+            },
+            {
+                id: 118,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428849693-0d6fea95-34f0-4105-9280-f03ee048665d.jpg"
+                ]
+            },
+            {
+                id: 119,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428872448-6ae4ffce-cb7f-40ae-82d9-9005d3772563.jpg"
+                ]
+            },
+            {
+                id: 120,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428893202-af04e316-6242-46c0-9be3-94554b7b536d.jpg"
+                ]
+            },
+            {
+                id: 121,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428924827-88b899e2-592a-44a2-ab0f-56925fa31c31.jpg"
+                ]
+            },
+            {
+                id: 122,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428974779-4aa5876d-b119-416c-bdb7-3d0d7a951c94.jpg"
+                ]
+            },
+            {
+                id: 123,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769428989267-dbd81814-4c94-4e28-b3c2-617f13c0874c.jpg"
+                ]
+            },
+            {
+                id: 124,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429010239-71325296-127b-4b83-8bc7-651bc911afaf.jpg"
+                ]
+            },
+            {
+                id: 125,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429035826-28995102-55ba-44d1-ae1b-87b0aca8689f.jpg"
+                ]
+            },
+            {
+                id: 126,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429063877-52332689-28dd-4698-a8e6-c359842fec41.jpg"
+                ]
+            },
+            {
+                id: 127,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429096460-f77275eb-6283-46d8-a4a1-8ac930e2cb34.jpg"
+                ]
+            },
+            {
+                id: 128,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429123053-ac4b5c87-3aa1-4c54-b979-a21f8e98f717.jpg"
+                ]
+            },
+            {
+                id: 129,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429148845-4aec7be6-2c1c-45a2-85d2-f6bb1b36a23c.jpg"
+                ]
+            },
+            {
+                id: 130,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429168763-42d71fca-661d-4b25-8e30-1c2f5594a1dc.jpg"
+                ]
+            },
+            {
+                id: 131,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429193310-a5f19916-2c7e-499b-b134-b64fd4d1077e.jpg"
+                ]
+            },
+            {
+                id: 132,
+                style: "new-chinese",
+                subcategory: "3",
+                title: "新中式三层别墅",
+                desc: "气势恢宏的三层中式建筑，适合大家庭居住",
+                features: ["三层结构", "观景露台", "多重屋檐", "气势恢宏"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769429221596-c2215aac-a21c-4e90-990f-1d02b6b41fb8.jpg"
+                ]
+            },
+
+            // 新中式风格 - 四层
+            {
+                id: 7,
+                style: "new-chinese",
+                subcategory: "4",
+                title: "新中式四层楼宇",
+                desc: "高层数的中式建筑，现代与传统完美融合",
+                features: ["四层结构", "电梯设计", "顶层花园", "现代中式"],
+                images: [
+                    "https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 简欧风格 - 一层 (不含兄弟双拼)
+            {
+                id: 12,
+                style: "simple-european",
+                subcategory: "1",
+                title: "简欧平层别墅",
+                desc: "欧式简约风格的单层住宅，优雅大方",
+                features: ["欧式线条", "拱形窗", "坡屋顶", "对称设计"],
+                images: [
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 简欧风格 - 二层
+            {
+                id: 13,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769424905479-f7aa30d7-8f09-4bfe-9c79-c36d1b0c740d.jpg"
+                ]
+            },
+
+            // 简欧风格 - 二层（新增）
+            {
+                id: 60,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425009658-8ff56d1d-e2d7-48d0-9ed6-8abb7abd323b.jpg"
+                ]
+            },
+            {
+                id: 61,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425053184-eed1e050-192b-4cbd-ae27-51480eb7bd6b.jpg"
+                ]
+            },
+            {
+                id: 62,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425093645-7fcfebb7-f6a4-49cb-a5ba-b387c8e2f36d.jpg"
+                ]
+            },
+            {
+                id: 63,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425122442-56bd37d8-f53c-4b91-92af-39d20178586b.jpg"
+                ]
+            },
+            {
+                id: 64,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425150502-f237cebe-92a2-4d79-955f-391b46e1b489.jpg"
+                ]
+            },
+            {
+                id: 65,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425178148-faa56cf2-075b-4b84-9328-41a23d60cc32.jpg"
+                ]
+            },
+            {
+                id: 66,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425205473-c3451f45-178e-4ba6-b9e3-602af35829f7.jpg"
+                ]
+            },
+            {
+                id: 67,
+                style: "simple-european",
+                subcategory: "2",
+                title: "简欧两层别墅",
+                desc: "经典的两层欧式别墅，优雅气派",
+                features: ["两层结构", "欧式柱", "阳台设计", "对称立面"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425235293-a6a40cb3-871b-43dc-ba62-b694e4032f3f.jpg"
+                ]
+            },
+
+            // 简欧风格 - 三层
+            {
+                id: 14,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425407770-ed9da233-a973-45a4-b7fa-8d98ca2497cf.jpg"
+                ]
+            },
+            {
+                id: 98,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425428076-f81dfe6a-8823-401e-88e1-f4c1a9708b46.jpg"
+                ]
+            },
+            {
+                id: 99,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425451472-f924f1c4-fcd0-44ca-869c-268debb66c2f.jpg"
+                ]
+            },
+            {
+                id: 100,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425506604-5cf26bb7-9377-4e6a-a28b-f8ecf3a4847e.jpg"
+                ]
+            },
+            {
+                id: 101,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425551058-f9c8086e-2e4c-499a-9c6d-5aab825fa75c.jpg"
+                ]
+            },
+            {
+                id: 102,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425585130-01647304-e848-4cae-b5b6-23a7bf359e3a.jpg"
+                ]
+            },
+            {
+                id: 103,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425614549-f2ad6459-df76-4246-8924-b3a9b348231b.jpg"
+                ]
+            },
+            {
+                id: 104,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425638743-f27d52df-5eb8-4d93-ae30-1b891f93cc8d.jpg"
+                ]
+            },
+            {
+                id: 105,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425664489-d12fc4ee-89f3-43c6-be37-f4700751c17c.jpg"
+                ]
+            },
+            {
+                id: 106,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425697561-7579db98-ebc7-4eb5-8816-3f6973980622.jpg"
+                ]
+            },
+            {
+                id: 107,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425723342-2751f11a-4788-4fe0-9a64-77a4fe7dc866.jpg"
+                ]
+            },
+            {
+                id: 108,
+                style: "simple-european",
+                subcategory: "3",
+                title: "简欧三层别墅",
+                desc: "气势恢宏的三层欧式建筑，空间宽敞",
+                features: ["三层结构", "欧式元素", "露台设计", "优雅大气"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769425757999-aa1e66ba-7d14-43d6-832b-2283b597c15e.jpg"
+                ]
+            },
+
+            // 简欧风格 - 四层
+            {
+                id: 15,
+                style: "simple-european",
+                subcategory: "4",
+                title: "简欧四层楼宇",
+                desc: "高层数的欧式建筑，现代与古典完美融合",
+                features: ["四层结构", "电梯设计", "欧式细节", "现代设施"],
+                images: [
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 现代风 - 一层 (不含兄弟双拼)
+            {
+                id: 18,
+                style: "modern",
+                subcategory: "1",
+                title: "现代风平层别墅",
+                desc: "现代简约风格的单层住宅，简洁时尚",
+                features: ["现代简约", "玻璃幕墙", "几何造型", "开放空间"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769577377054-f6b16add-3b19-4b15-8972-6adfbb2d78d9.jpg"
+                ]
+            },
+            {
+                id: 19,
+                style: "modern",
+                subcategory: "1",
+                title: "现代工业风平层",
+                desc: "融入工业设计元素的现代单层住宅，粗犷中带有精致",
+                features: ["工业风格", "裸露结构", "金属元素", "开放式布局"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769577395415-cdf05d17-6111-4377-87b4-bf36020bc461.jpg"
+                ]
+            },
+
+            // 现代风 - 二层
+            {
+                id: 21,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426104529-9565b52b-a7c4-48ae-83ce-a662cc09ca79.jpg"
+                ]
+            },
+            {
+                id: 71,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426136857-77951719-307a-477b-90bb-315035aaa309.jpg"
+                ]
+            },
+            {
+                id: 72,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426153736-02ff04fa-cf6e-4ced-ad23-8269ba2f08ec.jpg"
+                ]
+            },
+            {
+                id: 73,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426195863-425d5288-887d-42fe-89bd-7fbf80fdd6dd.jpg"
+                ]
+            },
+            {
+                id: 74,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426232348-4079a37f-d5f6-47e0-8c7b-e2d1743f06ee.jpg"
+                ]
+            },
+            {
+                id: 75,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426269002-713d9443-bff3-4d76-9a72-d2e06224b7c2.jpg"
+                ]
+            },
+            {
+                id: 76,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426310449-11e6b2bd-78ee-4561-ba25-6747ff94abd7.jpg"
+                ]
+            },
+            {
+                id: 77,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426341816-364eac4d-ca5e-43fc-b949-df76fe20343d.jpg"
+                ]
+            },
+            {
+                id: 78,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426367570-59d4876e-fd4f-4b7d-a52a-2617da3ef1eb.jpg"
+                ]
+            },
+            {
+                id: 79,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426431188-ccce9e2f-1275-44d1-8187-0b9be556b45d.jpg"
+                ]
+            },
+            {
+                id: 80,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426459672-d7dcd1cc-ca7d-4e4f-acf7-0a64c02f57a4.jpg"
+                ]
+            },
+            {
+                id: 81,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426486568-162d7f5d-d2f1-4741-9c71-45303598f658.jpg"
+                ]
+            },
+            {
+                id: 82,
+                style: "modern",
+                subcategory: "2",
+                title: "现代风两层别墅",
+                desc: "现代风格的两层住宅，时尚大气",
+                features: ["两层结构", "现代线条", "阳台设计", "简约时尚"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426512070-7078a0c5-ce08-4201-881e-b513514fcaa4.jpg"
+                ]
+            },
+
+            // 现代风 - 三层
+            {
+                id: 22,
+                style: "modern",
+                subcategory: "3",
+                title: "现代风三层别墅",
+                desc: "现代风格的三层建筑，设计新颖",
+                features: ["三层结构", "现代元素", "露台设计", "创新造型"],
+                images: [
+                    "https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 现代风 - 四层
+            {
+                id: 23,
+                style: "modern",
+                subcategory: "4",
+                title: "现代风四层楼宇",
+                desc: "现代风格的四层建筑，前沿设计",
+                features: ["四层结构", "电梯设计", "现代美学", "智能设施"],
+                images: [
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 苏氏风格 - 一层 (不含兄弟双拼)
+            {
+                id: 24,
+                style: "suzhou",
+                subcategory: "1",
+                title: "苏式园林平层",
+                desc: "苏州园林风格的平层住宅，雅致清幽",
+                features: ["苏式园林", "白墙黑瓦", "水景设计", "镂空窗棂"],
+                images: [
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 苏氏风格 - 二层
+            {
+                id: 25,
+                style: "suzhou",
+                subcategory: "2",
+                title: "苏式两层园林",
+                desc: "苏州园林风格的两层住宅，曲径通幽",
+                features: ["两层结构", "苏式元素", "连廊设计", "景观阳台"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769335453574-a04e7b4a-5f09-4995-bbf0-7a3de03613ec.jpg",
+                    "https://image2url.com/r2/default/images/1769335481461-2ffc9cbd-d768-496e-9aa0-0d96aadb4746.jpg"
+                ]
+            },
+            {
+                id: 26,
+                style: "suzhou",
+                subcategory: "2",
+                title: "苏式两层园林",
+                desc: "苏州园林风格的两层住宅，曲径通幽",
+                features: ["两层结构", "苏式元素", "连廊设计", "景观阳台"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769335628105-ca7e6bcd-696e-4595-a10c-519d94b906dd.jpg",
+                    "https://image2url.com/r2/default/images/1769335660684-1e5e12bd-df07-422b-b65f-6b6cc7473459.jpg"
+                ]
+            },
+            {
+                id: 68,
+                style: "suzhou",
+                subcategory: "2",
+                title: "苏式两层园林",
+                desc: "苏州园林风格的两层住宅，曲径通幽",
+                features: ["两层结构", "苏式元素", "连廊设计", "景观阳台"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426606835-63e23ad0-7cd9-41ea-b676-a33b154ec94d.jpg"
+                ]
+            },
+            {
+                id: 69,
+                style: "suzhou",
+                subcategory: "2",
+                title: "苏式两层园林",
+                desc: "苏州园林风格的两层住宅，曲径通幽",
+                features: ["两层结构", "苏式元素", "连廊设计", "景观阳台"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426635240-fe35da13-00e6-4940-a652-a0bacd1d05ac.jpg"
+                ]
+            },
+            {
+                id: 70,
+                style: "suzhou",
+                subcategory: "2",
+                title: "苏式两层园林",
+                desc: "苏州园林风格的两层住宅，曲径通幽",
+                features: ["两层结构", "苏式元素", "连廊设计", "景观阳台"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769426676774-12940a36-a790-4685-83d6-a9492fc530c5.jpg"
+                ]
+            },
+
+            // 苏氏风格 - 三层
+            {
+                id: 27,
+                style: "suzhou",
+                subcategory: "3",
+                title: "苏式三层园林",
+                desc: "苏州园林风格的三层住宅，雅致大气",
+                features: ["三层结构", "苏式美学", "观景露台", "园林景观"],
+                images: [
+                    "https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 苏氏风格 - 四层
+            {
+                id: 28,
+                style: "suzhou",
+                subcategory: "4",
+                title: "苏式四层楼宇",
+                desc: "高层苏式建筑，现代技术与传统美学结合",
+                features: ["四层结构", "电梯", "空中花园", "苏式元素"],
+                images: [
+                    "https://images.unsplash.com/photo-1576941089067-2de3c901e126?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 田园风格 - 一层 (不含兄弟双拼)
+            {
+                id: 29,
+                style: "garden",
+                subcategory: "1",
+                title: "田园平层别墅",
+                desc: "温馨自然的田园风格单层住宅，亲近自然",
+                features: ["自然材料", "坡屋顶", "门廊设计", "花园景观"],
+                images: [
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 田园风格 - 二层
+            {
+                id: 30,
+                style: "garden",
+                subcategory: "2",
+                title: "田园两层小楼",
+                desc: "两层田园风格建筑，温馨舒适，适合乡村环境",
+                features: ["两层结构", "阳台", "自然材料", "乡村风格"],
+                images: [
+                    "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 田园风格 - 三层
+            {
+                id: 31,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427210517-caa98c99-b7f9-4467-ab3f-2e2f0617e4a4.jpg"
+                ]
+            },
+            {
+                id: 109,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427250205-97a23f27-ceb4-4184-be67-2b913adb200a.jpg"
+                ]
+            },
+            {
+                id: 110,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427290876-4f6e9731-c025-4d2c-b876-12e29c8bf4f2.jpg"
+                ]
+            },
+            {
+                id: 111,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427314717-98c7d3f6-2b3c-4ec7-870d-d07461aced79.jpg"
+                ]
+            },
+            {
+                id: 112,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427337294-3ec48550-5bce-4398-9ed8-857baa6c4f03.jpg"
+                ]
+            },
+            {
+                id: 113,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427356790-ec66f3a1-97f6-4eff-80ac-af194fe90a6c.jpg"
+                ]
+            },
+            {
+                id: 114,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427373920-d714b203-5c31-4a5b-81cd-13df6c5e0022.jpg"
+                ]
+            },
+            {
+                id: 115,
+                style: "garden",
+                subcategory: "3",
+                title: "田园三层别墅",
+                desc: "三层田园风格建筑，空间宽敞，环境优美",
+                features: ["三层结构", "露台", "花园", "自然融合"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769427406120-fd707cdc-5e61-4eeb-8439-6e79d99b663e.jpg"
+                ]
+            },
+
+            // 田园风格 - 四层
+            {
+                id: 33,
+                style: "garden",
+                subcategory: "4",
+                title: "田园四层住宅",
+                desc: "高层田园风格建筑，现代与自然的完美结合",
+                features: ["四层结构", "阳台花园", "自然材料", "现代设施"],
+                images: [
+                    "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                ]
+            },
+
+            // 中式三合院/四合院 - 一层
+            {
+                id: 38,
+                style: "courtyard",
+                subcategory: "1",
+                title: "中式四合院",
+                desc: "经典的四合院建筑，四面围合，中间庭院",
+                features: ["四面围合", "中心庭院", "传统屋顶", "连廊设计"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769336287684-e903d6c7-bbf7-49dc-b6ce-2d09a9726eb0.jpg"
+                ]
+            },
+            {
+                id: 39,
+                style: "courtyard",
+                subcategory: "1",
+                title: "中式三合院",
+                desc: "三面围合的三合院，一面开放，视野更好",
+                features: ["三面围合", "开放一面", "庭院景观", "传统元素"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769336315761-f1eb6d03-ce2b-4d65-8849-ed000ade460f.jpg"
+                ]
+            },
+            {
+                id: 40,
+                style: "courtyard",
+                subcategory: "1",
+                title: "中式三合院",
+                desc: "三面围合的三合院，一面开放，视野更好",
+                features: ["三面围合", "开放一面", "庭院景观", "传统元素"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769336334044-932b0126-a3a5-4d92-8d2f-7ee5d6e0431c.jpg"
+                ]
+            },
+            {
+                id: 41,
+                style: "courtyard",
+                subcategory: "1",
+                title: "中式三合院",
+                desc: "三面围合的三合院，一面开放，视野更好",
+                features: ["层次分明", "空间丰富", "传统建筑", "文化传承"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769336359409-887930c4-859d-4cb9-b825-2933848101b0.jpg"
+                ]
+            },
+            {
+                id: 42,
+                style: "courtyard",
+                subcategory: "1",
+                title: "现代新中式四合院",
+                desc: "现代新中式四合院，保留传统韵味的同时融入现代设计",
+                features: ["现代设计", "传统韵味", "功能优化", "舒适生活"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769336461806-d8e612cd-23ac-4b36-b9ba-81d62c6e11e8.jpg"
+                ]
+            },
+            {
+                id: 43,
+                style: "courtyard",
+                subcategory: "1",
+                title: "新中式四合院",
+                desc: "经典四合院布局，庭院深深，意境优美",
+                features: ["经典布局", "庭院深深", "意境优美", "文化底蕴"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769336486808-a081270c-56f1-44ec-aaaf-aeeff3cb8d54.jpg"
+                ]
+            },
+            {
+                id: 44,
+                style: "courtyard",
+                subcategory: "1",
+                title: "传统中式四合院",
+                desc: "原汁原味的传统四合院，古色古香，极具文化底蕴",
+                features: ["传统工艺", "青砖黛瓦", "雕梁画栋", "古井庭院"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769577144600-defeb1a9-f783-41e7-b554-6d83edf03c6e.jpg"
+                ]
+            },
+            {
+                id: 45,
+                style: "courtyard",
+                subcategory: "1",
+                title: "现代简约四合院",
+                desc: "简约设计的现代四合院，保留传统布局的同时融入现代元素",
+                features: ["简约设计", "现代材料", "传统布局", "舒适空间"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769577206180-16fdfe70-2b50-4ef3-bc25-ab7b9520e842.jpg"
+                ]
+            },
+
+            // 兄弟双拼风格 - 不分楼层，独立展示
+            {
+                id: 50,
+                style: "duplex",
+                subcategory: "1",
+                title: "简欧兄弟双拼",
+                desc: "两户联排的单层欧式建筑，共享庭院，独立入户",
+                features: ["双拼设计", "共享庭院", "独立门户", "对称布局"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769333142594-a3c7682b-e6a4-4770-8bba-b63d356b272b.jpg",
+                    "https://image2url.com/r2/default/images/1769333188102-f0aefb6b-754f-4514-889c-1af891bae082.jpg",
+                    "https://image2url.com/r2/default/images/1769333238832-7303d749-d1f3-439f-97a1-46569567fae1.jpg",
+                    "https://image2url.com/r2/default/images/1769333291305-074871b9-2f6c-4c8a-9eb3-6d5748087179.jpg"
+                ]
+            },
+            {
+                id: 51,
+                style: "duplex",
+                subcategory: "1",
+                title: "简欧兄弟双拼",
+                desc: "两户联排的单层欧式建筑，共享庭院，独立入户",
+                features: ["双拼设计", "欧式对称", "共享庭院", "独立门户"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769335888581-404265fb-575a-45ad-aaec-848c5f97c064.jpg",
+                    "https://image2url.com/r2/default/images/1769335909565-7da9dd6b-4956-40a6-abae-d9a412882a12.jpg",
+                ]
+            },
+            {
+                id: 52,
+                style: "duplex",
+                subcategory: "1",
+                title: "简欧兄弟双拼",
+                desc: "两户联排的单层现代建筑，共享空间，独立单元",
+                features: ["双拼设计", "现代简约", "共享空间", "独立单元"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769335931782-a337140c-b074-4a05-9bae-79f056328b55.jpg",
+                    "https://image2url.com/r2/default/images/1769335950021-fe7bff9f-b05b-4123-95e4-b715ef9b9672.jpg"
+                ]
+            },
+            {
+                id: 53,
+                style: "duplex",
+                subcategory: "1",
+                title: "简欧兄弟双拼",
+                desc: "两户联排的单层苏式建筑，共享园林景观",
+                features: ["双拼设计", "共享园林", "独立门户", "苏式元素"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769335974130-2b22d538-21c4-46c7-a886-5bf6b5a3aee6.jpg",
+                    "https://image2url.com/r2/default/images/1769335999542-9c7df962-e366-410b-9d50-b31ec07e5c7f.jpg",
+                    "https://image2url.com/r2/default/images/1769336020326-ace95129-0bdd-4095-bb9b-bffad35d2ffa.jpg"
+                ]
+            },
+            {
+                id: 54,
+                style: "duplex",
+                subcategory: "1",
+                title: "简欧兄弟双拼",
+                desc: "两户联排的单层建筑，共享庭院，独立入户",
+                features: ["双拼设计", "共享庭院", "独立门户", "对称布局"],
+                images: [
+                    "https://image2url.com/r2/default/images/1769336073081-d84bebfe-c7c5-4aa8-b216-6f26d3a041c6.jpg",
+                    "https://image2url.com/r2/default/images/1769336098129-ea9b5961-223b-43d9-9b18-80b09ee3a780.jpg",
+                    "https://image2url.com/r2/default/images/1769336117754-69040592-b142-4acd-9a58-fa78743d882f.jpg"
+                ]
+            },
+
+        ];
+
+        // 轮播控制类 - 核心修复部分
+        class Carousel {
+            constructor() {
+                this.currentImages = [];
+                this.currentIndex = 0;
+                this.preloadedImages = {}; // 存储预加载的图片
+                // 绑定DOM元素
+                this.modalImage = document.getElementById('modal-image');
+                this.prevBtn = document.getElementById('prev-btn');
+                this.nextBtn = document.getElementById('next-btn');
+                this.indicatorsContainer = document.getElementById('image-indicators');
+
+                // 绑定事件
+                this.bindEvents();
+            }
+
+            // 绑定翻页事件
+            bindEvents() {
+                this.prevBtn.addEventListener('click', () => this.prev());
+                this.nextBtn.addEventListener('click', () => this.next());
+            }
+
+            // 初始化轮播数据 - 优化版
+            init(images) {
+                this.currentImages = images || [];
+                this.currentIndex = 0;
+                this.preloadedImages = {}; // 重置预加载缓存
+
+                if (this.currentImages.length === 0) {
+                    this.modalImage.src = '';
+                    this.hideControls();
+                    return;
+                }
+
+                // 显示加载状态
+                this.modalImage.style.opacity = '0.5';
+
+                // 加载第一张图片
+                const img = new Image();
+                img.onload = () => {
+                    this.preloadedImages[this.currentImages[0]] = img;
+                    this.modalImage.src = this.currentImages[0];
+                    this.modalImage.style.opacity = '1';
+                };
+                img.src = this.currentImages[0];
+
+                this.renderIndicators();
+                this.currentImages.length > 1 ? this.showControls() : this.hideControls();
+            }
+
+            // 上一张
+            prev() {
+                if (this.currentImages.length <= 1) return;
+                this.currentIndex = (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length;
+                this.updateImage();
+            }
+
+            // 下一张 - 稳定版
+            next() {
+                if (this.currentImages.length <= 1) return;
+                this.currentIndex = (this.currentIndex + 1) % this.currentImages.length;
+                this.updateImage();
+            }
+
+            // 更新当前显示图片 - 优化版
+            updateImage() {
+                const imageUrl = this.currentImages[this.currentIndex];
+
+                // 显示加载状态
+                this.modalImage.style.opacity = '0.5';
+
+                // 如果图片已经预加载，直接显示
+                if (this.preloadedImages[imageUrl]) {
+                    this.modalImage.src = imageUrl;
+                    this.modalImage.style.opacity = '1';
+                    this.updateIndicators();
+                    return;
+                }
+
+                // 创建新的Image对象加载图片
+                const img = new Image();
+                img.onload = () => {
+                    this.preloadedImages[imageUrl] = img;
+                    this.modalImage.src = imageUrl;
+                    this.modalImage.style.opacity = '1';
+                };
+                img.onerror = () => {
+                    this.modalImage.style.opacity = '1';
+                };
+                img.src = imageUrl;
+
+                this.updateIndicators();
+
+                // 预加载相邻图片
+                this.preloadAdjacent();
+            }
+
+            // 预加载相邻图片 - 优化版
+            preloadAdjacent() {
+                const preloadIndices = [
+                    (this.currentIndex + 1) % this.currentImages.length,
+                    (this.currentIndex + 2) % this.currentImages.length,
+                    (this.currentIndex - 1 + this.currentImages.length) % this.currentImages.length,
+                    (this.currentIndex - 2 + this.currentImages.length) % this.currentImages.length
+                ];
+
+                preloadIndices.forEach(index => {
+                    const url = this.currentImages[index];
+                    if (!this.preloadedImages[url]) {
+                        const img = new Image();
+                        img.onload = () => {
+                            this.preloadedImages[url] = img;
+                        };
+                        img.src = url;
+                    }
+                });
+            }
+
+            // 渲染指示器
+            renderIndicators() {
+                this.indicatorsContainer.innerHTML = '';
+                this.currentImages.forEach((_, index) => {
+                    const indicator = document.createElement('div');
+                    indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                    indicator.addEventListener('click', () => {
+                        this.currentIndex = index;
+                        this.updateImage();
+                    });
+                    this.indicatorsContainer.appendChild(indicator);
+                });
+            }
+
+            // 更新指示器状态
+            updateIndicators() {
+                const indicators = this.indicatorsContainer.querySelectorAll('.indicator');
+                indicators.forEach((ind, i) => {
+                    ind.classList.toggle('active', i === this.currentIndex);
+                });
+            }
+
+            // 显示控制按钮
+            showControls() {
+                this.prevBtn.style.display = 'flex';
+                this.nextBtn.style.display = 'flex';
+            }
+
+            // 隐藏控制按钮
+            hideControls() {
+                this.prevBtn.style.display = 'none';
+                this.nextBtn.style.display = 'none';
+            }
+        }
+
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            // 创建轮播实例
+            const carousel = new Carousel();
+
+            // 获取DOM元素
+            const styleButtons = document.querySelectorAll('.style-btn');
+            const subcategoryButtons = document.querySelectorAll('.subcategory-btn');
+            const imageGrid = document.getElementById('image-grid');
+            const imageCount = document.getElementById('image-count');
+            const loader = document.getElementById('loader');
+            const emptyState = document.getElementById('empty-state');
+            const modal = document.getElementById('image-modal');
+            const closeModal = document.getElementById('close-modal');
+            const modalTitle = document.getElementById('modal-title');
+            const modalStyle = document.getElementById('modal-style');
+            const modalSubcategory = document.getElementById('modal-subcategory');
+            const modalFeatures = document.getElementById('modal-features');
+            const modalDesc = document.getElementById('modal-desc');
+            const galleryTitle = document.querySelector('.gallery-title');
+
+            // 当前选中的风格和子类别
+            let currentStyle = 'new-chinese';
+            let currentSubcategory = '1';
+
+            // 预加载图片缓存 - 优化版
+            const preloadedImages = new Map();
+            
+            // 内存缓存管理
+            const MAX_CACHE_SIZE = 100; // 最大缓存图片数量
+            
+            // 缓存管理函数
+            function manageCache(url, img) {
+                if (preloadedImages.size >= MAX_CACHE_SIZE) {
+                    // 移除最早的缓存项
+                    const firstKey = preloadedImages.keys().next().value;
+                    preloadedImages.delete(firstKey);
+                }
+                preloadedImages.set(url, img);
+            }
+
+            // 风格名称映射
+            const styleNames = {
+                'new-chinese': '新中式',
+                'simple-european': '简欧',
+                'modern': '现代风',
+                'suzhou': '苏氏',
+                'garden': '田园',
+                'courtyard': '中式三合院/四合院',
+                'duplex': '兄弟双拼'
+            };
+
+            // 子类别名称映射
+            const subcategoryNames = {
+                '1': '一层',
+                '2': '二层',
+                '3': '三层',
+                '4': '四层',
+                'duplex': '兄弟双拼'
+            };
+
+            // 图片预加载函数 - 优化版
+            function preloadImage(url) {
+                if (!preloadedImages.has(url)) {
+                    const img = new Image();
+                    img.src = url;
+                    manageCache(url, img);
+                }
+            }
+
+            // 批量预加载图片
+            function preloadImages(urls) {
+                urls.forEach(url => preloadImage(url));
+            }
+
+            // 更新画廊标题
+            function updateGalleryTitle() {
+                const styleName = styleNames[currentStyle];
+                let subcategoryName = '';
+
+                if (currentStyle === 'duplex') {
+                    // 兄弟双拼：直接显示风格名称，不分楼层
+                    subcategoryName = '';
+                    galleryTitle.textContent = `${styleName}外观设计`;
+                } else {
+                    // 其他风格：显示风格和楼层
+                    subcategoryName = subcategoryNames[currentSubcategory];
+                    galleryTitle.textContent = `${styleName} - ${subcategoryName}外观设计`;
+                }
+            }
+
+            // 打开建筑详情弹窗
+            function openModal(building) {
+                modalTitle.textContent = building.title;
+                modalStyle.textContent = styleNames[building.style];
+                modalSubcategory.textContent = subcategoryNames[building.subcategory];
+                modalDesc.textContent = building.desc;
+
+                // 清空并添加特点标签
+                modalFeatures.innerHTML = '';
+                building.features.forEach(feature => {
+                    const featureTag = document.createElement('span');
+                    featureTag.className = 'feature-tag';
+                    featureTag.textContent = feature;
+                    modalFeatures.appendChild(featureTag);
+                });
+
+                // 预加载轮播图片
+                preloadImages(building.images || []);
+
+                // 初始化轮播
+                carousel.init(building.images || []);
+                modal.style.display = 'block';
+            }
+
+            // 显示建筑外观
+            function displayBuildings() {
+                // 显示加载指示器
+                loader.style.display = 'flex';
+                emptyState.style.display = 'none';
+                imageGrid.innerHTML = '';
+
+                // 移除模拟网络延迟，直接加载数据
+                try {
+                    // 过滤建筑数据
+                    // 根据风格类型筛选数据
+                    const filteredBuildings = buildingData.filter(building => {
+                        // 兄弟双拼：不按楼层筛选，显示所有
+                        if (currentStyle === 'duplex') {
+                            return building.style === currentStyle;
+                        }
+                        // 其他风格：按楼层筛选
+                        return building.style === currentStyle && building.subcategory === currentSubcategory;
+                    });
+
+                    // 更新图片计数
+                    imageCount.textContent = filteredBuildings.length;
+
+                    // 如果没有图片，显示空状态
+                    if (filteredBuildings.length === 0) {
+                        loader.style.display = 'none';
+                        emptyState.style.display = 'block';
+                        return;
+                    }
+
+                    // 创建Intersection Observer用于懒加载
+                    const observerOptions = {
+                        root: null,
+                        rootMargin: '0px',
+                        threshold: 0.1
+                    };
+
+                    const imageObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                const img = entry.target;
+                                const imgContainer = img.closest('.image-container');
+                                const dataSrc = img.getAttribute('data-src');
+                                
+                                if (dataSrc) {
+                                    // 显示加载状态
+                                    if (imgContainer) {
+                                        imgContainer.classList.add('loading');
+                                    }
+                                    
+                                    // 加载图片
+                                    img.src = dataSrc;
+                                    img.removeAttribute('data-src');
+                                    
+                                    // 监听加载完成事件
+                                    img.addEventListener('load', () => {
+                                        if (imgContainer) {
+                                            imgContainer.classList.remove('loading');
+                                        }
+                                        img.style.opacity = '1';
+                                    });
+                                    
+                                    img.addEventListener('error', () => {
+                                        if (imgContainer) {
+                                            imgContainer.classList.remove('loading');
+                                        }
+                                    });
+                                }
+                                
+                                observer.unobserve(img);
+                            }
+                        });
+                    }, observerOptions);
+
+                    // 生成建筑卡片
+                    filteredBuildings.forEach(building => {
+                        const buildingCard = document.createElement('div');
+                        buildingCard.className = 'image-card';
+
+                        // 统一使用images数组
+                        const images = building.images || [];
+                        const displayImage = images[0] || '';
+                        const hasMultipleImages = images.length > 1;
+
+                        // 先创建卡片基本结构，使用data-src进行懒加载
+                        buildingCard.innerHTML = `
+                            <div class="image-container">
+                                <img data-src="${displayImage}" alt="${building.title}" loading="lazy" style="opacity: 0; transition: opacity 0.3s ease;">
+                                <div class="image-tag">
+                                    ${styleNames[building.style]}
+                                    ${hasMultipleImages ? `<span style="margin-left: 5px;">${images.length}张</span>` : ''}
+                                </div>
+                            </div>
+                            <div class="image-info">
+                                <h3 class="image-title">${building.title}</h3>
+                                <p class="image-desc">${building.desc}</p>
+                            </div>
+                        `;
+
+                        // 获取图片元素，添加到observer
+                        const imgElement = buildingCard.querySelector('img');
+                        if (imgElement) {
+                            // 如果图片已经预加载完成，直接显示
+                            if (preloadedImages.has(displayImage)) {
+                                imgElement.src = displayImage;
+                                imgElement.removeAttribute('data-src');
+                                imgElement.style.opacity = '1';
+                            } else {
+                                // 添加到observer进行懒加载
+                                imageObserver.observe(imgElement);
+                            }
+                        }
+
+                        // 点击建筑打开弹窗
+                        buildingCard.addEventListener('click', () => openModal(building));
+
+                        imageGrid.appendChild(buildingCard);
+                    });
+
+                    // 隐藏加载指示器
+                    loader.style.display = 'none';
+                } catch (error) {
+                    console.error('加载建筑数据出错:', error);
+                    loader.style.display = 'none';
+                    emptyState.style.display = 'block';
+                    emptyState.querySelector('p').textContent = '加载数据时出错，请刷新页面重试';
+                }
+            }
+
+            // 初始更新画廊标题
+            updateGalleryTitle();
+
+            // 初始加载数据
+            displayBuildings();
+
+            // 风格按钮点击事件
+            styleButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // 更新当前选中的风格
+                    styleButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentStyle = button.dataset.style;
+
+                    // 根据风格类型显示对应的楼层选项
+                    if (currentStyle === 'courtyard') {
+                        // 中式三合院/四合院：只显示一层
+                        subcategoryButtons.forEach(btn => {
+                            if (btn.dataset.subcategory === '1') {
+                                btn.style.display = 'flex';
+                                btn.classList.add('active');
+                            } else {
+                                btn.style.display = 'none';
+                                btn.classList.remove('active');
+                            }
+                        });
+                        currentSubcategory = '1';
+                    } else if (currentStyle === 'duplex') {
+                        // 兄弟双拼：隐藏所有楼层按钮，不分层展示
+                        subcategoryButtons.forEach(btn => {
+                            btn.style.display = 'none';
+                        });
+                        currentSubcategory = 'all'; // 显示所有兄弟双拼
+                    } else {
+                        // 其他风格：显示所有楼层选项
+                        subcategoryButtons.forEach(btn => {
+                            btn.style.display = 'flex';
+                        });
+                    }
+
+                    // 更新显示
+                    updateGalleryTitle();
+                    displayBuildings();
+                });
+            });
+
+            // 子类别按钮点击事件
+            subcategoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // 如果是中式三合院/四合院，只能选择一层
+                    // 兄弟双拼已经隐藏了楼层按钮，不会触发此事件
+                    if (currentStyle === 'courtyard' && button.dataset.subcategory !== '1') {
+                        return;
+                    }
+
+                    // 更新当前选中的子类别
+                    subcategoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentSubcategory = button.dataset.subcategory;
+
+                    // 更新显示
+                    updateGalleryTitle();
+                    displayBuildings();
+                });
+            });
+
+            // 关闭弹窗事件
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            // 点击弹窗外关闭
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
